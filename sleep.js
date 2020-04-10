@@ -23,15 +23,24 @@
      sleep.prevent()
      sleep.allow()
 
+The prevent function returns a promise
+https://developers.google.com/web/updates/2016/03/play-returns-promise
+
  */
-var sleep = {
+const sleep = {
+    _config: {
+      baseUrl: 'https://github.com/PetCareN/computer-sleep/raw/master/resources/',
+    },
+    setBaseUrl: function(baseUrl) {
+      this._config.baseUrl = baseUrl;
+    },
     prevent: function() {
         if (!this._video) {
             this._init();
         }
 
         this._video.setAttribute('loop', 'loop');
-        this._video.play();
+        return this._video.play();
     },
     allow: function() {
         if (!this._video) {
@@ -50,16 +59,18 @@ var sleep = {
         this._video.style.left = '-10px';
 
         var source_mp4 = document.createElement('source');
-        source_mp4.setAttribute('src', 'https://github.com/ivanmaeder/computer-sleep/raw/master/resources/muted-blank.mp4');
+        source_mp4.setAttribute('src', this._config.baseUrl + '/muted-blank.mp4');
         source_mp4.setAttribute('type', 'video/mp4');
         this._video.appendChild(source_mp4);
 
         var source_ogg = document.createElement('source');
-        source_ogg.setAttribute('src', 'https://github.com/ivanmaeder/computer-sleep/raw/master/resources/muted-blank.ogv');
+        source_ogg.setAttribute('src', this._config.baseUrl + '/muted-blank.ogv');
         source_ogg.setAttribute('type', 'video/ogg');
         this._video.appendChild(source_ogg);
 
         document.body.appendChild(this._video);
     },
     _video: null
-}
+};
+
+module.exports = sleep;
