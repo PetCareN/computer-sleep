@@ -1,0 +1,7 @@
+{
+  "name": "computer-sleep",
+  "version": "1.0.0",
+  "main": "sleep.js",
+  "repository": "git@github.com:PetCareN/computer-sleep",
+  "license": "GPL-3.0"
+}

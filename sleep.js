@@ -23,8 +23,11 @@
      sleep.prevent()
      sleep.allow()
 
+The prevent function returns a promise
+https://developers.google.com/web/updates/2016/03/play-returns-promise
+
  */
-var sleep = {
+const sleep = {
     _config: {
       baseUrl: 'https://github.com/PetCareN/computer-sleep/raw/master/resources/',
     },
@@ -37,7 +40,7 @@ var sleep = {
         }
 
         this._video.setAttribute('loop', 'loop');
-        this._video.play();
+        return this._video.play();
     },
     allow: function() {
         if (!this._video) {
@@ -68,4 +71,6 @@ var sleep = {
         document.body.appendChild(this._video);
     },
     _video: null
-}
+};
+
+module.exports = sleep;
